@@ -25,7 +25,7 @@ const PurpleSwitch = withStyles({
 
 const Header = () => {
   return (
-    <header className="bg-white flex justify-between items-center px-7 py-1">
+    <header className="bg-white flex justify-between items-center px-7 py-1 fixed w-full">
       <div className="">
         <h1 className="text-xl font-bold text-gray-700">Abdulhamid.</h1>
       </div>
