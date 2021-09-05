@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bit/mui-org.material-ui.styles": "^4.9.10",
+    "@bit/mui-org.material-ui.switch": "^4.9.10",
     "@netlify/plugin-nextjs": "^3.9.0",
     "@svgr/webpack": "^5.5.0",
     "@tailwindcss/line-clamp": "^0.2.1",
     "@types/node": "^16.7.10",
     "@types/react": "17.0.19",
+    "@types/tailwindcss": "^2.2.1",
     "autoprefixer": "^10.3.4",
     "next": "11.1.2",
     "postcss": "^8.3.6",

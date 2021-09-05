@@ -1,19 +1,28 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useState } from 'react';
 import ComingSoon from '../components/ComingSoonBanner';
+import Header from '../components/Layouts/header';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
+  const [comingSoonOpen, setComingSoonOpen] = useState(true);
+
+  const onToglleComingSoon = () => {
+    setComingSoonOpen(!comingSoonOpen);
+  };
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Abdulhamid Oumer</title>
         <meta name="description" content="Abdulhamid Oumer Personal Site" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
-      <main className={styles.main}>
-        <ComingSoon />
+      <main className="bg-gray-200 h-full w-full absolute">
+        <ComingSoon isOpen={comingSoonOpen} onToogleOpen={onToglleComingSoon} />
+        <Header />
         {/* <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
