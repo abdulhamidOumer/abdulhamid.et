@@ -17,13 +17,13 @@ const editedConfig = {
 };
 
 editedConfig['i18n'] = {
-  locales: ['en', 'am'],
-  defaultLocale: 'en',
+  locales: ['en-US', 'am'],
+  defaultLocale: 'en-US',
   localeDetection: true,
 };
 
 editedConfig.images = {
-  domains: ['abdulhamid.et'],
+  domains: ['abdulhamid.et', 'images.ctfassets.net'],
 };
 editedConfig.target = 'serverless';
 

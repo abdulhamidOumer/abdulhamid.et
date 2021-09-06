@@ -5,8 +5,9 @@ import ComingSoon from '../components/ComingSoonBanner';
 import Hero from '../components/Home/hero';
 import Header from '../components/Layouts/header';
 import styles from '../styles/Home.module.css';
+import { IAppProps } from '../utils/types';
 
-const Home: NextPage = () => {
+const Home = (props: IAppProps) => {
   const [comingSoonOpen, setComingSoonOpen] = useState(true);
 
   const onToglleComingSoon = () => {
@@ -16,14 +17,19 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Abdulhamid Oumer</title>
+        <title>{props.appContent?.siteTitle}</title>
         <meta name="description" content="Abdulhamid Oumer Personal Site" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
       <main className="bg-gray-200 h-full w-full absolute">
         <ComingSoon isOpen={comingSoonOpen} onToogleOpen={onToglleComingSoon} />
-        <Header />
+        <Header
+          currentLocale={props.locale}
+          letsTalkLabel={props.appContent?.letsTalk || ''}
+          menus={props.appContent?.menus || []}
+          title={props?.appContent?.siteTitle || ''}
+        />
         <Hero />
 
         {/* <h1 className={styles.title}>
