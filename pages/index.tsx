@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 import ComingSoon from '../components/ComingSoonBanner';
+import About from '../components/Home/about';
 import Hero from '../components/Home/hero';
 import Header from '../components/Layouts/header';
 import styles from '../styles/Home.module.css';
@@ -22,17 +23,18 @@ const Home = (props: IAppProps) => {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
-      <main className="bg-gray-200 h-full w-full absolute">
-        <ComingSoon isOpen={comingSoonOpen} onToogleOpen={onToglleComingSoon} />
-        <Header
-          currentLocale={props.locale}
-          letsTalkLabel={props.appContent?.letsTalk || ''}
-          menus={props.appContent?.menus || []}
-          title={props?.appContent?.siteTitle || ''}
-        />
-        <Hero />
+      <ComingSoon isOpen={comingSoonOpen} onToogleOpen={onToglleComingSoon} />
 
-        {/* <h1 className={styles.title}>
+      <Hero
+        currentLocale={props.locale || ''}
+        greetingLabel={props.appContent?.greeting || ''}
+        fullName={props.appContent?.fullName || ''}
+        jobDescription={props.appContent?.jobDescription || ''}
+      />
+
+      <About />
+
+      {/* <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
@@ -70,7 +72,6 @@ const Home = (props: IAppProps) => {
             </p>
           </a>
         </div>*/}
-      </main>
 
       {/* <footer className={styles.footer}>
         <a

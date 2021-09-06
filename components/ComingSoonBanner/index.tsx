@@ -9,9 +9,11 @@ interface ICominSoonProps {
 
 const ComingSoon = (props: ICominSoonProps) => {
   return props.isOpen ? (
-    <div className="h-full w-full flex justify-center items-center absolute bg-white z-10 flex-col px-5">
+    <div className=" fixed h-full w-full flex justify-center items-center bg-white dark:bg-gray-900 z-40 flex-col px-5">
       <Image src={illustration} height={350} width={600} />
-      <h1 className="text-5xl font-bold text-gray-700 mt-5">Coming Soon!</h1>
+      <h1 className="text-5xl font-bold dark:text-white text-gray-700 mt-5">
+        Coming Soon!
+      </h1>
       <p className="text-gray-400 mt-4">
         My new site is under construction. Please check back later for the full
         features.

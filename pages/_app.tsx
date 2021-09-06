@@ -6,12 +6,12 @@ import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { getContents } from '../utils/contentful';
 import App from 'next/app';
-import { IAbdulhamidPortfolioContent } from '../utils/types';
+import { IAbdulhamidPortfolioContent, IMenuItemContent } from '../utils/types';
+import Header from '../components/Layouts/header';
+import { useEffect, useState } from 'react';
+import { ELocalStorageKeys, EThemes } from '../utils/constants';
 
 nprogress.configure({
-  minimum: 0.5,
-  easing: 'ease',
-  speed: 800,
   showSpinner: false,
 });
 
@@ -28,7 +28,60 @@ Router.events.on('routeChangeError', () => {
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const [activeRoute, setActiveRoute] = useState('#home');
+  const [currentTheme, setCurrentTheme] = useState<EThemes>(EThemes.light);
+
+  const checkWhichRouteIsActive = () => {
+    const hash = window.location.hash;
+    console.log(hash);
+    if (!hash || hash === '#') {
+      setActiveRoute('#home');
+    } else {
+      setActiveRoute(hash);
+    }
+  };
+
+  const handleThemeChange = (theme: EThemes) => {
+    localStorage.setItem(ELocalStorageKeys.theme, theme);
+    if (theme === EThemes.dark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    setCurrentTheme(theme);
+  };
+
+  useEffect(() => {
+    checkWhichRouteIsActive();
+
+    const savedTheme = localStorage.getItem(ELocalStorageKeys.theme);
+    const darkDevice = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
+    const deviceTheme = darkDevice ? EThemes.dark : EThemes.light;
+    const theme = savedTheme ? (savedTheme as EThemes) : deviceTheme;
+    handleThemeChange(theme);
+
+    Router.events.on('hashChangeComplete', checkWhichRouteIsActive);
+    return () => {
+      Router.events.off('hashChangeComplete', checkWhichRouteIsActive);
+    };
+  }, []);
+
+  return (
+    <main className="bg-gray-200 dark:bg-gray-700 h-full w-full absolute">
+      <Header
+        currentTheme={currentTheme}
+        currentLocale={pageProps.locale}
+        currentRoute={activeRoute}
+        onChangeTheme={handleThemeChange}
+        letsTalkLabel={pageProps.appContent?.letsTalk || ''}
+        menus={pageProps.appContent?.menus || []}
+        title={pageProps?.appContent?.siteTitle || ''}
+      />
+      <Component {...pageProps} />
+    </main>
+  );
 }
 
 MyApp.getInitialProps = async function (appContenxt: AppContext) {

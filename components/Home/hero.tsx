@@ -1,17 +1,31 @@
 import Image from 'next/image';
 import myImage from '../../assets/images/abdulhamid-black-and-white.png';
 
-const Hero = () => {
+interface IHeroProps {
+  greetingLabel: string;
+  fullName: string;
+  jobDescription: string;
+  currentLocale: string;
+}
+
+const Hero = (props: IHeroProps) => {
   return (
-    <div className="flex pt-24 items-center  bg-white flex-col">
-      <h3 className="text-4xl w-3/4 text-center font-medium text-gray-600">
-        Hi, I Am{' '}
-        <span className="font-bold text-secondary-500">Abdulhamid Oumer</span>.
-        A Full Stack Software Engineer Located In Addis Ababa, Ethiopia.
+    <section
+      id="home"
+      className="flex pt-40 items-center  bg-white dark:bg-gray-900 flex-col"
+    >
+      <h3
+        className={`sm:text-4xl text-2xl w-3/4 text-center ${
+          props.currentLocale === 'am' ? '' : 'font-medium'
+        } text-gray-600 dark:text-white`}
+      >
+        {props.greetingLabel}{' '}
+        <span className="font-bold text-secondary-500">{props.fullName}</span>
+        {props.jobDescription}
       </h3>
 
       <Image src={myImage} alt="Abdulhamid Oumer" />
-    </div>
+    </section>
   );
 };
 
