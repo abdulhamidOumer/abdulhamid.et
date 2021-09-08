@@ -12,10 +12,10 @@ const Hero = (props: IHeroProps) => {
   return (
     <section
       id="home"
-      className="flex pt-40 items-center  bg-white dark:bg-gray-900 flex-col"
+      className="flex pt-40 px-3 md:px-0 items-center  bg-white dark:bg-gray-900 flex-col"
     >
       <h3
-        className={`sm:text-4xl text-2xl w-3/4 text-center ${
+        className={`sm:text-4xl text-2xl w-full md:w-3/4 text-center ${
           props.currentLocale === 'am' ? '' : 'font-medium'
         } text-gray-600 dark:text-white`}
       >

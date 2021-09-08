@@ -92,7 +92,7 @@ const Header = (props: IHeaderProps) => {
       />
       <header
         ref={headerElement}
-        className="bg-white dark:bg-gray-900 flex justify-between items-center px-7 py-1 w-full fixed z-20"
+        className="bg-white dark:bg-gray-900 flex justify-between items-center px-3 md:px-7 py-1 w-full fixed z-20"
       >
         <div className="flex items-center text-gray-700 dark:text-white">
           <button className="block lg:hidden" onClick={onOpenMobileMenu}>

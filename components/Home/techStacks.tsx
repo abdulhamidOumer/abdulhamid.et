@@ -48,7 +48,7 @@ interface ITechStacksProps {
 const TechStacks = (props: ITechStacksProps) => {
   return (
     <div className="bg-gray-100 dark:bg-gray-800 flex flex-col p-3 md:p-5 items-center">
-      <h3 className="text-xl md:text-3xl text-gray-500 dark:text-white relative">
+      <h3 className="text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white relative">
         {props.title}
       </h3>
       <p className="mt-2 text-gray-400 dark:text-gray-300 text-center">

@@ -60,12 +60,12 @@ const Works = (props: IWorksProps) => {
   return (
     <section
       id="works"
-      className=" p-3 px-14 dark:bg-gray-800 bg-gray-100 flex flex-col items-center"
+      className=" p-3 pt-10 md:px-14 dark:bg-gray-800 bg-gray-100 flex flex-col items-center"
     >
-      <h3 className="text-xl md:text-3xl text-gray-500 dark:text-white relative">
+      <h3 className="text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white relative">
         {props.title}
       </h3>
-      <p className="my-5 text-gray-400 dark:text-gray-300 text-center">
+      <p className="mb-5 mt-2 text-gray-400 dark:text-gray-300 text-center">
         {' '}
         {props.description}{' '}
       </p>
@@ -87,7 +87,7 @@ const Works = (props: IWorksProps) => {
 
       <Dialog open={Boolean(openHighlight)} onClose={onCloseHighlight}>
         {openHighlight && (
-          <div className="bg-white p-5">
+          <div className="bg-white dark:bg-gray-800 p-5">
             <Carousel autoPlay showStatus={false}>
               {openHighlight?.fields?.screenshots &&
                 openHighlight?.fields?.screenshots.map((screenShot, index) => (
