@@ -6,3 +6,5 @@ export enum EThemes {
 export enum ELocalStorageKeys {
   theme = 'theme',
 }
+
+export const mainEntryId = '4EKv5YflDUUhLMDxxWttNo';

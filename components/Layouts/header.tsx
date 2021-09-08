@@ -99,7 +99,7 @@ const Header = (props: IHeaderProps) => {
             <MenuIcon />
           </button>
 
-          <h1 className="py-5 text-xl font-bold ml-5 lg:ml-0">
+          <h1 className="py-5 text-lg md:text-xl font-bold ml-5 lg:ml-0">
             {props.title}.
           </h1>
         </div>

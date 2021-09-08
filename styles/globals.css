@@ -37,3 +37,26 @@ a {
 #nprogress .bar {
   background: #8b5cf6 !important;
 }
+
+@media screen and (max-width: 880px) {
+  .tech-stack {
+    min-width: 100px;
+    margin-right: 50px;
+  }
+}
+
+.heading-underline:before {
+  content: '';
+  height: 2px;
+  width: 30%;
+  background: #8b5cf6;
+  position: absolute;
+  left: calc(70% - 10%);
+  bottom: -5px;
+}
+
+.portfolio-wrapper {
+  background: linear-gradient(0deg, #00000088 50%, #ffffff44 100%);
+  width: 100%;
+  height: 100%;
+}

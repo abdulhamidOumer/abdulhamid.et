@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <main className="bg-gray-200 dark:bg-gray-700 h-full w-full absolute">
+    <main className="bg-white dark:bg-gray-800 h-full w-full absolute">
       <Header
         currentTheme={currentTheme}
         currentLocale={pageProps.locale}

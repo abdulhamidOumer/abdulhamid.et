@@ -1,4 +1,5 @@
 import { ContentfulClientApi } from 'contentful';
+import { mainEntryId } from './constants';
 
 const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 const spaceID = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
@@ -8,12 +9,14 @@ const client: ContentfulClientApi = require('contentful').createClient({
   accessToken: accessToken || '',
 });
 
-export const getContents = async (locale: string, version: number = 1) => {
-  const entries = await client.getEntries({ locale });
-  if (Array.isArray(entries.items) && entries.items?.length >= version) {
-    const index = version - 1;
-    return entries.items[index].fields;
-  }
+export const getContents = async (locale: string) => {
+  try {
+    console.log('getContents', locale, mainEntryId);
+    const entry = await client.getEntry(mainEntryId, { locale });
+    if (entry.fields) return entry.fields;
 
-  throw new Error('No entries found');
+    throw new Error('No entries found');
+  } catch (error) {
+    console.log('getContents error', error);
+  }
 };
