@@ -1,16 +1,12 @@
-import type { NextPage, NextPageContext } from 'next';
+import type { NextPageContext } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import LargeBlogHighlight from '../components/Blogs/largeHighlight';
-import ComingSoon from '../components/ComingSoonBanner';
 import About from '../components/Home/about';
 import HomeBlogs from '../components/Home/blogs';
 import ContactMe from '../components/Home/contact';
 import Hero from '../components/Home/hero';
 import TechStacks from '../components/Home/techStacks';
 import Works from '../components/Home/works';
-import Header from '../components/Layouts/header';
-import styles from '../styles/Home.module.css';
 import { SITE_URL } from '../utils/constants';
 import { getBlogs } from '../utils/mdx';
 import { IAppProps, IBlogHighlight } from '../utils/types';
@@ -21,10 +17,6 @@ interface IHompePageProps extends IAppProps {
 
 const Home = (props: IHompePageProps) => {
   const [comingSoonOpen, setComingSoonOpen] = useState(true);
-
-  const onToglleComingSoon = () => {
-    setComingSoonOpen(!comingSoonOpen);
-  };
 
   return (
     <div className="dark:bg-gray-800 bg-gray-100">
@@ -45,7 +37,7 @@ const Home = (props: IHompePageProps) => {
           content={props.appContent?.aboutMeDescription}
           name="description"
         />
-        <meta content="article" property="og:type" />
+        <meta content="website" property="og:type" />
         <meta
           content={`${props.appContent?.fullName} | ${props.appContent?.jobTitle}`}
           property="og:title"
@@ -55,7 +47,10 @@ const Home = (props: IHompePageProps) => {
           property="og:description"
         />
         <meta content={`${SITE_URL}`} property="og:url" />
-        <meta content={`/static/abdulhamid-oumer.jpeg`} property="og:image" />
+        <meta
+          content={`${SITE_URL}/static/abdulhamid-oumer.jpeg`}
+          property="og:image"
+        />
         <meta content="summary_large_image" name="twitter:card" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
