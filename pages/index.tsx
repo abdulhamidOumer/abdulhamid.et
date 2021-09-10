@@ -1,16 +1,24 @@
-import type { NextPage } from 'next';
+import type { NextPage, NextPageContext } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
+import LargeBlogHighlight from '../components/Blogs/largeHighlight';
 import ComingSoon from '../components/ComingSoonBanner';
 import About from '../components/Home/about';
+import HomeBlogs from '../components/Home/blogs';
+import ContactMe from '../components/Home/contact';
 import Hero from '../components/Home/hero';
 import TechStacks from '../components/Home/techStacks';
 import Works from '../components/Home/works';
 import Header from '../components/Layouts/header';
 import styles from '../styles/Home.module.css';
-import { IAppProps } from '../utils/types';
+import { getBlogs } from '../utils/mdx';
+import { IAppProps, IBlogHighlight } from '../utils/types';
 
-const Home = (props: IAppProps) => {
+interface IHompePageProps extends IAppProps {
+  highLightBlogs: IBlogHighlight[];
+}
+
+const Home = (props: IHompePageProps) => {
   const [comingSoonOpen, setComingSoonOpen] = useState(true);
 
   const onToglleComingSoon = () => {
@@ -18,14 +26,14 @@ const Home = (props: IAppProps) => {
   };
 
   return (
-    <div>
+    <div className="dark:bg-gray-800 bg-gray-100">
       <Head>
         <title>{props.appContent?.siteTitle}</title>
         <meta name="description" content="Abdulhamid Oumer Personal Site" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
-      <ComingSoon isOpen={comingSoonOpen} onToogleOpen={onToglleComingSoon} />
+      {/* <ComingSoon isOpen={comingSoonOpen} onToogleOpen={onToglleComingSoon} /> */}
 
       <Hero
         currentLocale={props.locale || ''}
@@ -51,8 +59,31 @@ const Home = (props: IAppProps) => {
         viewProjectLabel={props.appContent?.viewProject || ''}
         readMoreLabel={props.appContent?.readMore || ''}
       />
+      <HomeBlogs
+        title={props.appContent?.blogSectionTitle || ''}
+        viewAllContent={props?.appContent?.viewAll || ''}
+        highLightBlogs={props.highLightBlogs}
+        minReadContent={props.appContent?.minuteRead || ''}
+        readBlogContent={props.appContent?.readBlog || ''}
+      />
+
+      <ContactMe
+        title={props.appContent?.contactSectionTitle || ''}
+        description={props.appContent?.contactSectionDescription || ''}
+        socialsContent={props.appContent?.socials}
+        preferAnEmailContent={props.appContent?.preferAnEmail || ''}
+        reachWithEmailContent={props.appContent?.reachWithEmail || ''}
+      />
     </div>
   );
+};
+
+export const getStaticProps = async (ctx: NextPageContext) => {
+  const highlights = getBlogs(
+    ['slug', 'date', 'thumbnail', 'title', 'description', 'readingMinute'],
+    2,
+  );
+  return { props: { highLightBlogs: highlights.blogs } };
 };
 
 export default Home;

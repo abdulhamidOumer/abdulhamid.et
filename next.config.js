@@ -6,15 +6,13 @@ const editedConfig = {
       use: ['@svgr/webpack'],
     });
 
-    // if (!isServer) {
-    //   config.node = {
-    //     fs: 'empty',
-    //   };
-    // }
+    config.resolve.fallback = { fs: false };
 
     return config;
   },
 };
+
+editedConfig.webpack5 = true;
 
 editedConfig['i18n'] = {
   locales: ['en-US', 'am'],

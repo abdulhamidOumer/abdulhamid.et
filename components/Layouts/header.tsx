@@ -39,6 +39,7 @@ interface IHeaderProps {
   currentRoute: string;
   currentTheme: EThemes;
   onChangeTheme: (theme: EThemes) => void;
+  emailAddress: string;
 }
 
 const Header = (props: IHeaderProps) => {
@@ -98,10 +99,13 @@ const Header = (props: IHeaderProps) => {
           <button className="block lg:hidden" onClick={onOpenMobileMenu}>
             <MenuIcon />
           </button>
-
-          <h1 className="py-5 text-lg md:text-xl font-bold ml-5 lg:ml-0">
-            {props.title}.
-          </h1>
+          <Link href="/">
+            <a>
+              <h1 className="py-5 text-lg md:text-xl font-bold ml-5 lg:ml-0">
+                {props.title}.
+              </h1>
+            </a>
+          </Link>
         </div>
 
         <nav className="hidden lg:flex">
@@ -111,7 +115,7 @@ const Header = (props: IHeaderProps) => {
                 key={item?.fields?.routeHash || `menu-${index}`}
                 className="px-5 py-5 font-bold text-sm"
               >
-                <Link href={item.fields?.routeHash || '#'}>
+                <Link href={'/' + item.fields?.routeHash || '#'}>
                   <a
                     className={`${
                       props.currentRoute === item.fields?.routeHash
@@ -128,9 +132,11 @@ const Header = (props: IHeaderProps) => {
         </nav>
 
         <div className="flex items-center">
-          <button className="hidden md:block bg-primary-500 text-white px-6 h-8 text-sm rounded-full hover:bg-primary-600">
-            {props.letsTalkLabel}
-          </button>
+          <Link href={`mailto:${props.emailAddress}`}>
+            <button className="hidden md:block bg-primary-500 text-white px-6 h-8 text-sm rounded-full hover:bg-primary-600">
+              {props.letsTalkLabel}
+            </button>
+          </Link>
 
           <button onClick={togglePopover} ref={setAnchorEl}>
             <GlobeIcon className="text-primary-500 ml-3" />

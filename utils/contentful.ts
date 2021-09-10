@@ -11,7 +11,6 @@ const client: ContentfulClientApi = require('contentful').createClient({
 
 export const getContents = async (locale: string) => {
   try {
-    console.log('getContents', locale, mainEntryId);
     const entry = await client.getEntry(mainEntryId, { locale });
     if (entry.fields) return entry.fields;
 

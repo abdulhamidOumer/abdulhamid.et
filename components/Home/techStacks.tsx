@@ -51,16 +51,16 @@ const TechStacks = (props: ITechStacksProps) => {
       <h3 className="text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white relative">
         {props.title}
       </h3>
-      <p className="mt-2 text-gray-400 dark:text-gray-300 text-center">
+      <p className="mt-2 text-gray-500 dark:text-gray-300 text-center">
         {' '}
         {props.description}{' '}
       </p>
       <div className="flex w-full lg:px-20 justify-between mt-10 items-end overflow-x-auto">
-        <TechStack icon={ReactIcon} title="React" rate={4} />
-        <TechStack icon={NodeBrands} title="Node.JS" rate={4} />
-        <TechStack icon={MongoBrands} title="Mongo DB" rate={3.5} />
+        <TechStack icon={ReactIcon} title="React" rate={4.5} />
+        <TechStack icon={NodeBrands} title="Node.JS" rate={4.5} />
+        <TechStack icon={MongoBrands} title="Mongo DB" rate={4} />
         <TechStack icon={ShopifyBrands} title="Shopify" rate={2.5} />
-        <TechStack icon={DockerBrands} title="Docker" rate={3.5} />
+        <TechStack icon={DockerBrands} title="Docker" rate={4} />
         <TechStack icon={GitlabBrands} title="Gitlab CI/CD" rate={4} />
       </div>
     </div>

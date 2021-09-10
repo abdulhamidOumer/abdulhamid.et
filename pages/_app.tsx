@@ -1,5 +1,6 @@
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
+import '../styles/blog.css';
 import type { AppContext, AppProps } from 'next/app';
 import Router from 'next/router';
 import nprogress from 'nprogress';
@@ -10,6 +11,7 @@ import { IAbdulhamidPortfolioContent, IMenuItemContent } from '../utils/types';
 import Header from '../components/Layouts/header';
 import { useEffect, useState } from 'react';
 import { ELocalStorageKeys, EThemes } from '../utils/constants';
+import Footer from '../components/Layouts/footet';
 
 nprogress.configure({
   showSpinner: false,
@@ -28,16 +30,22 @@ Router.events.on('routeChangeError', () => {
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const content = pageProps.appContent as IAbdulhamidPortfolioContent;
   const [activeRoute, setActiveRoute] = useState('#home');
   const [currentTheme, setCurrentTheme] = useState<EThemes>(EThemes.light);
 
   const checkWhichRouteIsActive = () => {
     const hash = window.location.hash;
-    console.log(hash);
-    if (!hash || hash === '#') {
+    const path = window.location.pathname;
+
+    if ((!hash || hash === '#') && path === '/') {
       setActiveRoute('#home');
-    } else {
+    } else if (hash) {
       setActiveRoute(hash);
+    } else if (path.includes('blog')) {
+      setActiveRoute('#blogs');
+    } else {
+      setActiveRoute(path);
     }
   };
 
@@ -63,13 +71,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     handleThemeChange(theme);
 
     Router.events.on('hashChangeComplete', checkWhichRouteIsActive);
+    Router.events.on('routeChangeComplete', checkWhichRouteIsActive);
     return () => {
       Router.events.off('hashChangeComplete', checkWhichRouteIsActive);
+      Router.events.off('routeChangeComplete', checkWhichRouteIsActive);
     };
   }, []);
 
   return (
-    <main className="bg-white dark:bg-gray-800 h-full w-full absolute">
+    <main className="bg-gray-100 dark:bg-gray-800 h-auto w-full absolute">
       <Header
         currentTheme={currentTheme}
         currentLocale={pageProps.locale}
@@ -78,8 +88,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         letsTalkLabel={pageProps.appContent?.letsTalk || ''}
         menus={pageProps.appContent?.menus || []}
         title={pageProps?.appContent?.siteTitle || ''}
+        emailAddress={content?.socials?.fields?.emailAddress || ''}
       />
       <Component {...pageProps} />
+      <Footer
+        andContent={content?.and || ''}
+        codeOn={content?.fullCode || ''}
+        companyName={content?.companyName || ''}
+        currentJobStatus={content?.currentJobStatus || ''}
+        fullName={content?.fullName || ''}
+        hostedOn={content?.hostedOn || ''}
+        jobTitle={content?.jobTitle || ''}
+        siteMadeWith={content?.siteMade || ''}
+        socialsContent={content?.socials}
+      />
     </main>
   );
 }

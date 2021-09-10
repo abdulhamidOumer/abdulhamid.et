@@ -1,0 +1,98 @@
+---
+date: 'February 08, 2021'
+thumbnail: /static/webp-cover.png
+title: Using WebP Without Fearing Browser Support
+description: A Blog to show you how you can use Webp images on your projects without worrying about browser supports. We will try to see how you alternatively use other image formats for unsupported browsers.
+---
+
+On my [previous post](https://dev.to/abdulhamidoumer/get-that-hundo-part-1-handling-unused-font-awesome-css-styles-17nd) we saw how I was able to improve my lighthouse scores by moving away from font-awesome and using SVG sprites. We stopped last time when I got the lighthouse scores down below
+
+![Last Score](https://dev-to-uploads.s3.amazonaws.com/i/41yai2zxapxrec0vnkf5.png)
+
+In the second part of "Get that hundo" I will share with you how I was able to implement one of the optimizations recommended by lighthouse :
+
+## Using a next-gen image format
+
+One of the suggestions made by lighthouse was to use a next-generation image format that is smaller in size. Some of these image formats are `webp`, `JPEG XR` or `JPEG 2000`. Why even bother serving your images in this format? Well, these image formats are the superior ones in both compression and quality compared to their predecessors `PNG` and `JPEG`.
+
+Out of the three next-gen formats I chose WebP because it is supported in more browsers, it is being developed by Google currently and it also supports both lossy & lossless compressions.
+
+To convert images to WebP we can easily use sites like [webp-converter.com](https://webp-converter.com/). This specific tool even has the ability to do lossless or lossy compression.
+
+Now when using WebP the main issue that you face is browser compatibility. WebP is not even supported on safari except for the latest version, which is 14 at the time of writing this blog. That is where the HTML `<picture>` tag comes into play.
+
+Picture tag takes one `<img>` tag and zero or more sources as a child element. The `<picture>` tag will then automatically choose the image source that will suit the user's browser or other conditions like max-width of the screen, if all sources don't meet the condition it will fallback to the `<img>` tag source. Below is a code showing you how we could take advantage of this :
+
+```html
+<picture>
+  <source srcset="./assets/avatar.webp" type="image/webp" />
+  <source srcset="./assets/avatar.png" type="image/png" />
+  <img
+    width="200px"
+    height="200px"
+    alt="avatar"
+    class="bio-container__content__avatar avatar"
+    src="./assets/avatar.png"
+  />
+</picture>
+```
+
+Now, we can handle images in our HTML this way but what about background images that are set by a CSS style. There is a solution for that.
+
+On Google developers WebP FAQ [page](https://developers.google.com/speed/webp/faq) there is already a vanilla JavaScript implementation to check if a browser supports WebP formats. The implemented code takes a small part of a certain featured WebP image (i.e lossy or lossless) and tries to decode that if the operation is successful it means the browser supports WebP images. The function is implemented this way
+
+```javascript
+// check_webp_feature:
+//   'feature' can be one of 'lossy', 'lossless', 'alpha' or 'animation'.
+//   'callback(feature, result)' will be passed back the detection result (in an asynchronous way!)
+function check_webp_feature(feature, callback) {
+  var kTestImages = {
+    lossy: 'UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA',
+    lossless: 'UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==',
+    alpha:
+      'UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==',
+    animation:
+      'UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA',
+  };
+  var img = new Image();
+  img.onload = function () {
+    var result = img.width > 0 && img.height > 0;
+    callback(feature, result);
+  };
+  img.onerror = function () {
+    callback(feature, false);
+  };
+  img.src = 'data:image/webp;base64,' + kTestImages[feature];
+}
+```
+
+Let's see how can we take advantage of this function to display other formats for browsers that don't WebP. The first thing we need to do is create one normal CSS style with WebP background and one other style with PNG background.
+
+```css
+.full-screen-hero {
+  background-image: url('../assets/header-background.webp');
+}
+
+.full-screen-hero.no-webp {
+  background-image: url('../assets/header-background.png');
+}
+```
+
+Next, we check if the browser supports WebP on window load and add the `.no-webp` class if it doesn't support it. I will use the `lossless` feature check for now cause that was how I converted my background image to WebP.
+
+```javascript
+window.onload = function () {
+  check_webp_feature('lossless', function (feature, success) {
+    if (!success) {
+      // Recurse theough elements with WebP background and add the no-webp class
+      fullScrenHero.forEach(function (bgElement) {
+        bgElement.classList.add('no-webp');
+      });
+    }
+  });
+};
+```
+
+This optimization didn't have much effect on the lighthouse performance score because I was already using WebP as a background image before all this but now I was able to solve the compatibility issues on safari.
+
+That's it now the site is ready to serve WebP on supporting browsers and PNGs on browsers that don't support WebP.

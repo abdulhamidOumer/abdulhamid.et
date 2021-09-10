@@ -23,6 +23,26 @@ export interface IWorkContent extends IContentMain {
     projectLink?: string;
   };
 }
+
+export interface ISocialsContent extends IContentMain {
+  fields?: {
+    githubTitle?: string;
+    githubLink?: string;
+    twitterTitle?: string;
+    twitterLink?: string;
+    instagramTitle?: string;
+    instagramLink?: string;
+    linkedInTitle?: string;
+    linkedInLink?: string;
+    facebookTitle?: string;
+    facebookLink?: string;
+    devTitle?: string;
+    devLink?: string;
+    emailTitle?: string;
+    emailAddress?: string;
+    companyLink?: string;
+  };
+}
 export interface IAbdulhamidPortfolioContent {
   siteTitle?: string;
   menus?: IMenuItemContent[];
@@ -42,9 +62,36 @@ export interface IAbdulhamidPortfolioContent {
 
   readMore?: string;
   viewProject?: string;
+
+  blogSectionTitle?: string;
+  readBlog?: string;
+  minuteRead?: string;
+  contactSectionTitle?: string;
+  contactSectionDescription?: string;
+  preferAnEmail?: string;
+  reachWithEmail?: string;
+  jobTitle?: string;
+  currentJobStatus?: string;
+  companyName?: string;
+  myBlogs?: string;
+  viewAll?: string;
+  siteMade?: string;
+  and?: string;
+  hostedOn?: string;
+  fullCode?: string;
+  socials?: ISocialsContent;
 }
 
 export interface IAppProps extends AppContext {
   appContent: IAbdulhamidPortfolioContent;
   locale: string;
+}
+
+export interface IBlogHighlight {
+  slug: string;
+  date: string;
+  thumbnail: string;
+  title: string;
+  description: string;
+  readingMinute: string;
 }

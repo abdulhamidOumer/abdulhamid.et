@@ -1,0 +1,86 @@
+---
+date: 'February 01, 2021'
+thumbnail: /static/unused-fonts.png
+title: Handling unused fontawesome styles
+description: On this blog we wil see how we can impove the performance of our site by removing unused css styles, most importantly unused fontawesome styles.
+---
+
+On this blog we will be taking a look at how we can improve our lighthouse score by taking care of unused CSS issue that was caused by font-awesome, according to how it worked for me at least. So the story of how I decided to go through this topic goes like this, I just threw some stuff like font-awesome and some styles to the landing page without considering performance at first and see how that can affect my lighthouse score. Note that I have only written a few lines of Javascript to handle some smooth scrolling at this time, but lo and behold the performance score is in the gutters.
+
+![Low Performance Score](https://dev-to-uploads.s3.amazonaws.com/i/j0vbtnv8iv2iz7ssxlnr.png)
+
+Now there were some reasons as to why this was happening, I will try to investigate and solve the main reason on this blog :
+
+## Unused CSS styles
+
+Now, why would unused CSS styles affect a site's speed? The logic is pretty simple, unused CSS will increase the size of your page thus taking a longer time to finish a request. When the unused styles are few in number it might not have a drastic effect on the page size. But when the unused styles come from libraries like font awesome or bootstrap, which have somewhat larger minified file sizes (58KB & 149KB respectively) lighthouse will be complaining about a lot of unused styles. Besides, you will also have a lot of redundant code.
+
+![CSS Coverage](https://dev-to-uploads.s3.amazonaws.com/i/9zz7nfm20vcilfivbl6q.png)
+
+By also taking a look at the developer console coverage tab, we can see from above that 99% of the code is redundant and unused.
+
+So what can we do to resolve unused CSS issues when using icon fonts like font-awesome. One solution can be using tools like [fontello](https://fontello.com/). Fontello allows you to create your own font icon pack by letting you pick the icons that your site will be using, It has got icon packs from font-awesome 4.7, Typicons and more. you will also be able to add your own SVG icons.
+
+Another solution can be using inline SVGs. When using inline SVGs you will be inserting the SVG code right in the HTML. This will bring all your icons with just one HTTP request unlike font icons which will require another request. Not only that SVGs hold the upper hand when it comes to accessibility. Tags like `<title>` make it accessible for screen readers. With that in mind I decided to use inline SVG. Let's take a look at one way you can achieve that step by step.
+
+1. Download the icons in SVG format. Fontawesome already lets you do that easily from the [gallery](https://fontawesome.com/icons?d=gallery) page.
+
+2. Build your SVG icon system with tools like [IcoMoon](https://icomoon.io/) or [Fontastic](http://fontastic.me/). IcoMoon will give you an SVG sprite and some css code that you can insert in to your project.
+
+   ```html
+   <svg>
+     <!-- Some SVG Code -->
+   </svg>
+   ```
+
+   The CSS will look something like this code looks like this
+
+   ```css
+   .icon {
+     display: inline-block;
+     width: 1em;
+     height: 1em;
+     font-size: 1.2rem;
+     stroke-width: 0;
+     stroke: currentColor;
+     fill: currentColor;
+   }
+
+   .icon-github-brands {
+     width: 0.96875em;
+   }
+
+   .icon-instagram-brands {
+     width: 0.875em;
+   }
+
+   .icon-linkedin-brands {
+     width: 0.875em;
+   }
+
+   .icon-arrow-down-solid {
+     width: 0.875em;
+   }
+   ```
+
+3. Add the SVG sprite to your HTML file body. Don't worry it's hidden so it will only appear when you call and use them. And add the CSS styles to your CSS file.
+
+4. Call your icons where you normally would use font icons. For example, I was able to wrap my inline SVG by my `<a>` tags this way.
+
+   ```html
+   <a
+     class="full-screen-hero__contents__socials__item"
+     href="https://www.twitter.com/aotwits"
+     target="_blank"
+   >
+     <svg class="icon icon-twitter-brands">
+       <use xlink:href="#icon-twitter-brands"></use>
+     </svg>
+   </a>
+   ```
+
+   `xlink:href` value references the ID of your SVG icon from the sprite.
+
+By handling unused CSS problems this way I was able to improve my performance and accessibility score by 20 points.
+![Improved performance](https://dev-to-uploads.s3.amazonaws.com/i/v2vtw428lc27d81c3g2i.png)
+But that's not enough largest contentful paint still needs some work and like what the title says we will not stop until we get that hundo !! I will be back with some more solutions on Part 2. You can view the source code of this project on [github](https://github.com/abdulhamidOumer) and view my site on [netlify](https://abdulhamid-dev.netlify.app/).

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import YegnaHome from '../../assets/images/Yegna-Home.jpeg';
-import YegnaScreenShot from '../../assets/images/Yegna-Home.png';
+import LeftIcon from '../../assets/icons/chevron-left-solid.svg';
+import RightIcon from '../../assets/icons/chevron-right-solid.svg';
 import BuilingIcon from '../../assets/icons/building-regular.svg';
 import Dialog from '@bit/mui-org.material-ui.dialog';
 import { Carousel } from 'react-responsive-carousel';
@@ -27,12 +27,9 @@ interface IWorksProps {
 const WorkHihlight = (props: IWorkHighlightProps) => {
   return (
     <div
-      className="shadow-xl bg-no-repeat bg-cover bg-center rounded-md mt-4"
+      className="h-64 shadow-xl bg-no-repeat bg-cover bg-center rounded-md mt-4 highlight-cards"
       style={{
         backgroundImage: `url(${props.image})`,
-        width: 450,
-        height: 250,
-        maxWidth: '100%',
       }}
     >
       <div className="portfolio-wrapper p-5 flex flex-col justify-end">
@@ -60,17 +57,17 @@ const Works = (props: IWorksProps) => {
   return (
     <section
       id="works"
-      className=" p-3 pt-10 md:px-14 dark:bg-gray-800 bg-gray-100 flex flex-col items-center"
+      className=" p-3 pt-10 md:px-20 dark:bg-gray-800 bg-gray-100 flex flex-col items-center"
     >
       <h3 className="text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white relative">
         {props.title}
       </h3>
-      <p className="mb-5 mt-2 text-gray-400 dark:text-gray-300 text-center">
+      <p className="mb-5 mt-2 text-gray-500 dark:text-gray-300 text-center">
         {' '}
         {props.description}{' '}
       </p>
 
-      <div className="flex justify-evenly flex-wrap w-full">
+      <div className="flex justify-evenly xl:justify-between flex-wrap w-full">
         {props.works.map((work, index) => (
           <WorkHihlight
             key={`work-h-${index}`}
@@ -88,18 +85,39 @@ const Works = (props: IWorksProps) => {
       <Dialog open={Boolean(openHighlight)} onClose={onCloseHighlight}>
         {openHighlight && (
           <div className="bg-white dark:bg-gray-800 p-5">
-            <Carousel autoPlay showStatus={false}>
+            <Carousel
+              infiniteLoop
+              showStatus={false}
+              renderArrowPrev={onClick => (
+                <button
+                  style={{ top: 'calc(50% - 18px)', width: 36, height: 36 }}
+                  className="absolute z-10 rounded-full text-white  bg-primary-500 top-1/2 cursor-pointer flex justify-center items-center"
+                  onClick={onClick}
+                >
+                  <LeftIcon width={16} height={16} />
+                </button>
+              )}
+              renderArrowNext={onClick => (
+                <button
+                  style={{ top: 'calc(50% - 18px)', width: 36, height: 36 }}
+                  className="absolute z-10 rounded-full text-white  bg-primary-500 top-1/2 cursor-pointer right-0 flex justify-center items-center"
+                  onClick={onClick}
+                >
+                  <RightIcon width={16} height={16} />
+                </button>
+              )}
+            >
               {openHighlight?.fields?.screenshots &&
                 openHighlight?.fields?.screenshots.map((screenShot, index) => (
-                  <div
-                    className="w-full h-80 bg-cover bg-center bg-no-repeat"
-                    style={{
-                      backgroundImage: `url(http:${
-                        screenShot?.fields?.file?.url || ''
-                      })`,
-                    }}
-                    key={`work-screenshot-${index}`}
-                  ></div>
+                  <div className="w-full">
+                    <Image
+                      alt={screenShot?.fields?.title}
+                      className="max-w-full h-auto rounded-md"
+                      src={`https:${screenShot?.fields?.file?.url}`}
+                      width="450px"
+                      height={'250px'}
+                    />
+                  </div>
                 ))}
             </Carousel>
             <div className="flex items-center justify-between mb-3">
