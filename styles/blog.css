@@ -57,6 +57,7 @@
   .blog-highlight {
     max-width: 1400px;
     margin: 0 auto;
+    @apply mt-3;
   }
 
   .view-all-container {

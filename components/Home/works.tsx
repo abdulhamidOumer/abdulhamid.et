@@ -57,7 +57,7 @@ const Works = (props: IWorksProps) => {
   return (
     <section
       id="works"
-      className=" p-3 pt-10 md:px-20 dark:bg-gray-800 bg-gray-100 flex flex-col items-center"
+      className=" p-3 pt-10 md:px-20 2xl:px-40 dark:bg-gray-800 bg-gray-100 flex flex-col items-center"
     >
       <h3 className="text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white relative">
         {props.title}

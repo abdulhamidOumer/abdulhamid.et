@@ -13,7 +13,7 @@ interface IHomeBlogProps {
 
 const HomeBlogs = (props: IHomeBlogProps) => {
   return (
-    <section id="blogs" className="px-3 md:px-20 py-5">
+    <section id="blogs" className="px-3 md:px-20 2xl:px-40 py-5 pt-10">
       <h3 className="text-center mb-4 text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white">
         {props.title}
       </h3>

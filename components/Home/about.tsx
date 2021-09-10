@@ -13,7 +13,7 @@ const About = (props: IAboutProps) => {
         <HelpIcon />
       </div> */}
 
-      <section className="p-3 md:p-14 mt-3 text-center bg-primary-500 md:w-3/4 xl:w-3/5 text-white">
+      <section className="p-3 md:p-14 mt-3 text-center bg-primary-500 md:w-3/4 xl:w-3/5 2xl:w-1/2 2xl:py-20 text-white">
         <h2 className="text-xl md:text-3xl font-bold ">{props.title}</h2>
         <p className=" mt-3 text-md">{props.description}</p>
       </section>

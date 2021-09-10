@@ -37,7 +37,7 @@ const MobileHeader = (props: IMobileHeaderProps) => {
               key={item?.fields?.routeHash || `menu-${index}`}
               className="py-5 text-xl"
             >
-              <Link href={item.fields?.routeHash || '#'}>
+              <Link href={'/' + item.fields?.routeHash || '#'}>
                 <a
                   className={`${
                     props.currentRoute === item.fields?.routeHash

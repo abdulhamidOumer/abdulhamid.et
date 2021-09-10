@@ -55,7 +55,7 @@ const TechStacks = (props: ITechStacksProps) => {
         {' '}
         {props.description}{' '}
       </p>
-      <div className="flex w-full lg:px-20 justify-between mt-10 items-end overflow-x-auto">
+      <div className="flex w-full lg:px-20 2xl:px-40 justify-between mt-10 items-end overflow-x-auto">
         <TechStack icon={ReactIcon} title="React" rate={4.5} />
         <TechStack icon={NodeBrands} title="Node.JS" rate={4.5} />
         <TechStack icon={MongoBrands} title="Mongo DB" rate={4} />

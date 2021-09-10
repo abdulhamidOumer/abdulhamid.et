@@ -19,7 +19,7 @@ const ContactMe = (props: IContactMeProps) => {
   return (
     <section
       id="contact"
-      className="px-3 md:px-20 max-w-full py-5  flex flex-col justify-center items-center mb-5"
+      className="px-3 pt-10 md:px-20 max-w-full py-5  flex flex-col justify-center items-center mb-5"
     >
       <h3 className="text-center mb-2 text-2xl font-bold md:font-normal md:text-3xl text-gray-500 dark:text-white">
         {props.title}
