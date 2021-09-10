@@ -25,7 +25,7 @@ const SmallBlogHighLight = (props: IBlogHighlightProps) => {
           {blog.title}
         </h3>
         <p className="text-gray-400 dark:text-gray-300">{blog.description}</p>
-        <Link href={`/blogs/${blog.slug}`}>
+        <Link passHref href={`/blogs/${blog.slug}`}>
           <a
             style={{ width: 'fit-content' }}
             className="mt-3 text-center py-2 text-primary-500 font-bold rounded-lg flex items-center"
