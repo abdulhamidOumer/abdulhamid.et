@@ -55,10 +55,10 @@ a {
   content: '';
   height: 2px;
   width: 30%;
-  background: #8b5cf6;
   position: absolute;
   left: calc(70% - 10%);
   bottom: -5px;
+  @apply bg-primary-500;
 }
 
 .portfolio-wrapper {

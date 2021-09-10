@@ -2,6 +2,7 @@ import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import '../styles/blog.css';
 import type { AppContext, AppProps } from 'next/app';
+import Head from 'next/head';
 import Router from 'next/router';
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -79,30 +80,35 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <main className="bg-gray-100 dark:bg-gray-800 h-auto w-full absolute">
-      <Header
-        currentTheme={currentTheme}
-        currentLocale={pageProps.locale}
-        currentRoute={activeRoute}
-        onChangeTheme={handleThemeChange}
-        letsTalkLabel={pageProps.appContent?.letsTalk || ''}
-        menus={pageProps.appContent?.menus || []}
-        title={pageProps?.appContent?.siteTitle || ''}
-        emailAddress={content?.socials?.fields?.emailAddress || ''}
-      />
-      <Component {...pageProps} />
-      <Footer
-        andContent={content?.and || ''}
-        codeOn={content?.fullCode || ''}
-        companyName={content?.companyName || ''}
-        currentJobStatus={content?.currentJobStatus || ''}
-        fullName={content?.fullName || ''}
-        hostedOn={content?.hostedOn || ''}
-        jobTitle={content?.jobTitle || ''}
-        siteMadeWith={content?.siteMade || ''}
-        socialsContent={content?.socials}
-      />
-    </main>
+    <>
+      <Head>
+        <meta name="theme-color" content="#8b5cf6" />
+      </Head>
+      <main className="bg-gray-100 dark:bg-gray-800 h-auto w-full absolute">
+        <Header
+          currentTheme={currentTheme}
+          currentLocale={pageProps.locale}
+          currentRoute={activeRoute}
+          onChangeTheme={handleThemeChange}
+          letsTalkLabel={pageProps.appContent?.letsTalk || ''}
+          menus={pageProps.appContent?.menus || []}
+          title={pageProps?.appContent?.siteTitle || ''}
+          emailAddress={content?.socials?.fields?.emailAddress || ''}
+        />
+        <Component {...pageProps} />
+        <Footer
+          andContent={content?.and || ''}
+          codeOn={content?.fullCode || ''}
+          companyName={content?.companyName || ''}
+          currentJobStatus={content?.currentJobStatus || ''}
+          fullName={content?.fullName || ''}
+          hostedOn={content?.hostedOn || ''}
+          jobTitle={content?.jobTitle || ''}
+          siteMadeWith={content?.siteMade || ''}
+          socialsContent={content?.socials}
+        />
+      </main>
+    </>
   );
 }
 
