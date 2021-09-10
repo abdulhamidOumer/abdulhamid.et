@@ -127,7 +127,7 @@ const Footer = (props: IFooterProps) => {
           . {props.codeOn}{' '}
           <span className="text-primary-500">
             <a
-              href="https://github.com/abdulhamidoumer/next-tailwind-starter"
+              href="https://github.com/abdulhamidOumer/my-portfolior"
               className="text-primary-500"
               target="_blank"
               rel="noopener noreferrer"
