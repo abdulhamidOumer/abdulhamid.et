@@ -10,6 +10,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { getBlog, getBlogs } from '../../utils/mdx';
 import { IAppProps, IBlogHighlight } from '../../utils/types';
 import CodeHighlighter from '../../components/Blogs/code.component';
+import { SITE_URL } from '../../utils/constants';
 
 const components = { Link, code: CodeHighlighter };
 
@@ -25,8 +26,6 @@ interface Props extends IAppProps {
   frontMatter: Omit<IBlogHighlight, 'slug'>;
   slug: string;
 }
-
-const SITE_URL = 'https://abdulhamid.et';
 
 const PostPage: React.FC<Props> = ({
   source,

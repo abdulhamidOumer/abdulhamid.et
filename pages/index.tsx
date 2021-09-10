@@ -11,6 +11,7 @@ import TechStacks from '../components/Home/techStacks';
 import Works from '../components/Home/works';
 import Header from '../components/Layouts/header';
 import styles from '../styles/Home.module.css';
+import { SITE_URL } from '../utils/constants';
 import { getBlogs } from '../utils/mdx';
 import { IAppProps, IBlogHighlight } from '../utils/types';
 
@@ -28,8 +29,34 @@ const Home = (props: IHompePageProps) => {
   return (
     <div className="dark:bg-gray-800 bg-gray-100">
       <Head>
-        <title>{props.appContent?.siteTitle}</title>
-        <meta name="description" content="Abdulhamid Oumer Personal Site" />
+        <title>
+          {`${props.appContent?.fullName} | ${props.appContent?.jobTitle}`}
+        </title>
+        <meta
+          name="description"
+          content={props.appContent?.aboutMeDescription}
+        />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <meta
+          title={`${props.appContent?.fullName} | ${props.appContent?.jobTitle}`}
+        />
+        <meta property="og:locale" content={props.locale} />
+        <meta
+          content={props.appContent?.aboutMeDescription}
+          name="description"
+        />
+        <meta content="article" property="og:type" />
+        <meta
+          content={`${props.appContent?.fullName} | ${props.appContent?.jobTitle}`}
+          property="og:title"
+        />
+        <meta
+          content={props.appContent?.aboutMeDescription}
+          property="og:description"
+        />
+        <meta content={`${SITE_URL}`} property="og:url" />
+        <meta content={`/static/abdulhamid-oumer.jpeg`} property="og:image" />
+        <meta content="summary_large_image" name="twitter:card" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 

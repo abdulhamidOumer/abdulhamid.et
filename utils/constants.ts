@@ -8,3 +8,5 @@ export enum ELocalStorageKeys {
 }
 
 export const mainEntryId = '4EKv5YflDUUhLMDxxWttNo';
+
+export const SITE_URL = 'https://abdulhamid.et';
