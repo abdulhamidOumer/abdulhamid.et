@@ -7,7 +7,7 @@ const LargeBlogHighlight = (props: IBlogHighlightProps) => {
 
   return (
     <div
-      className={`blog-card rounded-xl mt-3 xl:rounded-none max-w-full w-96 xl:h-80 xl:w-full flex flex-col ${
+      className={`blog-card rounded-xl mt-3 md:mr-5 xl:rounded-none max-w-full w-96 xl:h-80 xl:w-full flex flex-col ${
         props.reversed ? 'xl:flex-row-reverse' : 'xl:flex-row'
       } bg-white dark:bg-gray-900 blog-highlight`}
     >

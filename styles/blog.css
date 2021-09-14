@@ -49,6 +49,12 @@
   padding-left: 40px !important;
 }
 
+.blog ol {
+  @apply list-decimal;
+  @apply dark:text-gray-400;
+  padding-left: 40px !important;
+}
+
 .blog li {
   @apply my-3;
 }

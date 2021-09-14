@@ -1,0 +1,50 @@
+---
+date: 'September 15, 2021'
+thumbnail: /static/cpanel-netlify.png
+title: Pointing cPanel Hosting Domain To Netlify - The pain of hosting websites in Ethiopia
+description: As most gosting providers in Ethiopia are cPanel based, on this blog / guide we will try to see how we can point a cPanel hosting domain  to our Netlify site.
+---
+I recently finished working on my portfolio site [abdulhamid.et](https://abdulhamid.et), this blog is dedicated to one of the issue I was facing while trying to implement my site on a Next.JS environment. Something to note here is that, this was not the first time I was facing this issue, the same exact thing happened when we were trying to implement our podcast [Zemach FM](https://zemachfm.com)'s new site.
+
+### Disclaimer
+* This guide assumes that you already have a free Netlify subdomain site.
+* Some cPanel hosting providers give access to some resources and disable some resources by default. This tutorial is designed with the assumption that you have `Domain`, `Subdomain` and `Zone Editor` access from your hosting provider.
+
+The core problem is how do you deploy a JAM stack website with your own custom domain from Ethiopia. Recently some web-hosting services have been coming up here and there in Ethiopia. But All the services I have run in to use C-Panel hosting. This will solve the domain name purchasing issue in our Ethiopia, but hosting sites that are not static or not Wordpress on cPanel is going to be painful. Some of the providers claim they have Node.JS support but they are full of bugs with no support to CI/CD integrations, you will have to be willing to upload your code base every time you make a change. This is not scalable. There might be a way to implement automatic deployment right from your repository, but I am not aware of it currently. Plus I am sure you will all agree with me that cloud hosting services like [Netlify](https://netlify.com) and [Vercel](https://vercel.com) have much superior response time compared to most of the hosting providers that we currently have access to in Ethiopia.
+
+Of course the main reason we can't use paid services outside Ethiopia is because it's impossible to make international payments online from Ethiopia. But thanks to [Netlify](https://netlify.com), I was able to deploy my portfolio with their free plan. 
+
+So I have a custom domain and my Next.JS site on netlify with it's own automatic build and deploy set up. What can be done to integrate the two separate services ?
+
+That's where the cPanel's Zone editor and Netlify's custom domain come in to play. Let's first see how we can point our root domain from cPanel to our Netlify site instance.
+
+1. First navigate to the `Zone Editor` from the home page of your cPanel.
+![Click zone editor](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lqopr8zglpbxq94qf0br.png)
+2. From there click `Manage` on your main domain.
+3. After the page finishes loading there will be two records with your root domain names, at the top of the list. Change their settings according to the screenshot below. The `A` record will point to Netlify's default [load balancer IP address](https://docs.netlify.com/domains-https/custom-domains/configure-external-dns/#configure-an-apex-domain), `75.2.60.5`. Change the second record to an `MX` type and fill in your netlify site default subdomain. You can find your netlify default subdomain at app.netlify.com > Your Web App / Domain > Domain Settings
+![Zone editor domain list](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t12os271oae840jadtz6.png)
+4. Go to your netlify dashboard click on the site you want to configure > Domain Setting > Add Domain Alias. This will open a setting modal. On the modal fill in your new domain and save your changes.
+![Site list](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/izhvnlip0dezpygy9s2o.png)
+![Add Root Domain Alias](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tvtoah304ce1zsagg0lf.png)
+5. After that finishes saving, you can set the root domain as a primary domain. Just click on the `options` dropdown next to the newly added domain.
+
+## Pointing a cPanel Subodmain to Netlify
+If you are pointing a subdomain to your netlify instance, the process can take place as follow.
+
+1. Create the subdomain by clicking on the `Subdomains` button in your cPanel Domains section.
+![Create Cpanel Subdomain](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mi28636iqex1x17df3bf.png)
+2. Give your subdomain a name and leave the root directory the default value of the form.
+![Cpanel Subdomains](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jwgkigv604jdtk1jbvb3.png)
+3. Go back to the previous `Domains` section at the home page of cPanel and navigate to `Zone Editor`. From there click `Manage` on your main domain.
+4. Find your subdomain on the list that is displayed. You will probably find two version of your subdomain. one with the prefix `www` and one without.
+![New subdomains](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1xqe0mnbxw1vk073ydg5.png)
+5. Remove the one with the `www` prefix and edit the main subdomain just like it's shown below. Change the record type to `CNAME` and the record to your netlify's default subdomain. You can find your netlify default subdomain at app.netlify.com > Your Web App / Domain > Domain Settings.
+![Subdomain record edit](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0jhqb33mv2e0lempe8uc.png)
+
+6. Finally go to your netlify dashboard click on the site you want to configure > `Domain Setting` > `Add Domain Alias`. This will open a setting modal. On the modal fill in your new subdomain and save your changes.
+![Site list](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/izhvnlip0dezpygy9s2o.png)
+![Add Subdomain Alias](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5r5hnpj34uzh5yyo2xcl.png)
+
+Now if your DNS configuration was correct your new domain and subdomain are good to go. 
+
+**Note**: You might need to wait a few minute until your sites SSL kicks in. Until then you can surf your site in un-secure mode.

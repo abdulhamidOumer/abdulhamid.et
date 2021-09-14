@@ -25,7 +25,7 @@ const BlogsPage = (props: IBlogsPageProps) => {
           {props.appContent?.myBlogs || ''}
         </h1>
 
-        <div className="flex justify-between flex-row flex-wrap w-full mt-6">
+        <div className="flex flex-row flex-wrap w-full mt-6">
           <div className="xl:mb-5">
             {props.blogs?.length > 0 && (
               <LargeBlogHighlight

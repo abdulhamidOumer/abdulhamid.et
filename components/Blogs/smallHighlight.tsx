@@ -7,7 +7,7 @@ const SmallBlogHighLight = (props: IBlogHighlightProps) => {
 
   return (
     <div
-      className={`blog-card rounded-xl mt-3 max-w-full w-96 flex flex-col bg-white dark:bg-gray-900`}
+      className={`blog-card rounded-xl mt-3 md:mr-5 max-w-full w-96 flex flex-col bg-white dark:bg-gray-900`}
     >
       <div
         style={{ backgroundImage: `url(${props.blog?.thumbnail || ''})` }}
