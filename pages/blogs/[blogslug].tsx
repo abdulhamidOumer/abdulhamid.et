@@ -64,10 +64,13 @@ const PostPage: React.FC<Props> = ({
       <article className="flex mt-24 mb-10 justify-center">
         <div className="rounded-lg bg-white p-10 dark:bg-gray-900 flex flex-col w-full lg:w-3/4 xl:w-3/5">
           <div className="w-full">
-            <img
+            <Image
               className="rounded-md"
               alt={frontMatter.title}
               src={frontMatter.thumbnail}
+              width={16}
+              height={9}
+              layout="responsive"
             />
           </div>
 
