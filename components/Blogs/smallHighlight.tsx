@@ -14,7 +14,7 @@ const SmallBlogHighLight = (props: IBlogHighlightProps) => {
         className="rounded-t-xl w-full h-44 bg-no-repeat bg-cover bg-center"
       ></div>
 
-      <div className="w-full p-5 flex flex-col justify-between">
+      <div className="w-full p-5 h-full flex flex-col justify-between">
         <div className="text-sm text-gray-500 dark:text-gray-300 flex justify-between">
           <p className="">{blog.date}</p>
           <p>

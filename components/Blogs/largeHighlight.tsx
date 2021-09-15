@@ -24,7 +24,7 @@ const LargeBlogHighlight = (props: IBlogHighlightProps) => {
           </p>
         </div>
 
-        <h3 className="text-gray-700 dark:text-white text-3xl xl:text-4xl w-full xl:w-2/3 font-bold">
+        <h3 className="text-gray-700 dark:text-white text-3xl xl:text-4xl w-full xl:w-3/4 font-bold">
           {blog.title}
         </h3>
         <p className="text-gray-400 dark:text-gray-300">{blog.description}</p>
