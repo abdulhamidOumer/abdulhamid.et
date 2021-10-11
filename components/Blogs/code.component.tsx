@@ -8,13 +8,13 @@ interface CodeProps {
 }
 
 const CodeHighlighter = ({ children, className }: CodeProps) => {
-  const language = className.replace(/language-/, '') as Language;
+  const language = className?.replace(/language-/, '') as Language;
 
   return (
     <Highlight
       {...defaultProps}
       code={children}
-      language={language}
+      language={language || 'bash'}
       theme={theme}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (

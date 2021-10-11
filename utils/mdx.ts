@@ -66,7 +66,9 @@ export function getBlogs(
   const blogs = filePaths
     .map(filePath => getSingleBlog(filePath, fields))
     // sort blogs by date in descending order
-    .sort((blog1, blog2) => (blog1.date > blog2.date ? -1 : 1));
+    .sort((blog1, blog2) =>
+      new Date(blog1.date) > new Date(blog2.date) ? -1 : 1,
+    );
 
   if (maxLimit) {
     const limited = blogs.slice(0, maxLimit);

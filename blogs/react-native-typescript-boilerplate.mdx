@@ -1,0 +1,65 @@
+---
+date: 'October 12, 2021'
+thumbnail: /static/RNTSB-wide.png
+title: React Boilerplate For React Native
+description: A react native boilerplate currently under development. Feature of the boilerplate currently includes slice and component generation as well as Splash Screen logo and App Icon setters.
+---
+
+If you have worked with [React Boilerplate](https://www.reactboilerplate.com/) before you probably know how much time it saves you when getting started with a big project. Not only at the start of a project, react boilerplate also comes in handy when you are in the middle of development. It makes writing repetitive codes easier by providing you with it's own CLI tools to generate boilerplate codes.
+
+![Repeating Code](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fltag4gc03w8d9ykm6c4.gif)
+
+I started working on a React Native project recently and thought to my self why there was no similar thing for React Native, to the best of my knowledge. So I decided to migrate some of the things we knew on [React Boilerplate](https://www.reactboilerplate.com/) and [React Boilerplate CRA Template](https://github.com/react-boilerplate/react-boilerplate-cra-template) to a separate react native template.
+
+**Disclaimer**: Current version of the template might not be too optimal for production builds.
+
+The template takes some part of the original react boilerplates like the component and slice generators, redux toolkit setup and redux saga. It also adds react native specific CLI tools like App Icon setters and Splash screen logo setters as well as React navigation.
+
+[The template](https://github.com/abdulhamidOumer/react-native-typescript-boilerplate) comes by default with the tools listed below :
+
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Navigation](https://reactnavigation.org/)
+- [React Native Splash Screen](https://www.npmjs.com/package/react-native-splash-screen)
+- [Redux Saga](https://redux-saga.js.org/)
+- [Reselect](https://github.com/reduxjs/reselect)
+
+**Note**: This blog assumes that you are familiar with [`react-native`](https://reactnative.dev/) and the CLI tool provided by `react-native`.
+
+## Setting up the template
+
+Getting started with the template is fairly easy. There are only a few number of steps as listed down below.
+
+**Note**: using [YARN](https://yarnpkg.com/) over NPM is recommend when using this template.
+
+1\. Create react native app by providing`react-native typescript-boilerplate` as a template.
+
+```
+npx react-native myapp --template https://github.com/abdulhamidOumer/react-native-typescript-boilerplate.git
+```
+
+2\. Get into the generated app's directory and explore the code and features.
+
+```
+cd myapp
+yarn start
+```
+
+3\. Get started by setting your app icon or splash screen icon.
+
+```
+yarn set
+```
+
+This command is used to set native related assets for your app. One pain point of working with react native is generating app icons with their corresponding platform size guidelines. By using this command you will be able to generate both Android and IOS app icons as well as splash screen icons based on the platform recommended size guideline just from one picture. Pictures that you want to use as app icon or as a splash screen logo need to be inside `src/assets/images`.
+
+4\. Optional - Initiate husky pre-commit hooks
+
+```
+yarn init-husky
+```
+
+Full documentation for the current version is available on [GitBook](https://abdulhamidoumer.gitbook.io/rn-ts-boilerplate/). Any kind of contribution is always welcome and appreciated as I am getting started with the project there is still a lot to be done. Full code available on [Github](https://github.com/abdulhamidOumer/react-native-typescript-boilerplate)
+
+📖 [GitBook](https://abdulhamidoumer.gitbook.io/rn-ts-boilerplate/)
+
+🚀 [Github](https://github.com/abdulhamidOumer/react-native-typescript-boilerplate)
