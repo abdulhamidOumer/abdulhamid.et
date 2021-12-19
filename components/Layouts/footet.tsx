@@ -81,7 +81,7 @@ const Footer = (props: IFooterProps) => {
           <p className="text-sm w-80 max-w-full text-gray-400 dark:text-gray-200">
             {props.currentJobStatus}{' '}
             <Link href={socialsContent?.companyLink || ''}>
-              <a className="text-yellow-500" target="_blank">
+              <a className="text-purple-500" target="_blank">
                 {props.companyName}
               </a>
             </Link>
